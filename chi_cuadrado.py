@@ -1,6 +1,21 @@
 import math
 import pandas as pd
 from scipy import stats
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+def grafica_barra(axis_x, axis_y, esperado):
+    data = axis_y
+    labels = ["{:10.5f}".format(x) for x in axis_x]
+    plt.xticks(range(len(data)), labels)
+    plt.xlabel('Rangos')
+    plt.ylabel('Valor')
+    plt.title('Chi cuadrado')
+    plt.bar(range(len(data)), data)
+    plt.axhline(y=esperado, color='r', linestyle='-')
+
+    plt.show()
 
 def chi_cuadrado(numeros_aleatorios, porcentaje):
     N = len(numeros_aleatorios)
@@ -49,6 +64,11 @@ def chi_cuadrado(numeros_aleatorios, porcentaje):
     print('=== TABLA ===')
 
     print(tabla)
+
+    print('')
+    print('=== GRAFICA ===')
+
+    grafica_barra(tabla['limite_superior'].tolist(), tabla['O'].tolist(), E)
 
     print('')
     print('chi cuadrado =', chi_cuadrado)

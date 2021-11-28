@@ -1,5 +1,13 @@
 import pandas as pd
 from scipy import stats
+import matplotlib.pyplot as plt
+
+def grafica_kolmogorov(obtenido, esperado, max):
+    plt.plot(range(1, len(obtenido) + 1), obtenido, label="Obtenido")
+    plt.plot(range(1, len(obtenido) + 1), esperado, label="Esperado")
+    plt.plot([max['i'], max['i']], [max['Ui'], max['i/N']], color="red", label="Diferencia")
+    plt.legend()
+    plt.show()
 
 def ks_critical_value(n_trials, alpha):
     return stats.ksone.ppf(1-alpha/2, n_trials)
@@ -41,6 +49,8 @@ def kolmogorov(numeros_aleatorios, porcentaje):
 
     Dk = ks_critical_value(N, porcentaje)
     Di = tabla.Di.max()
+
+    grafica_kolmogorov(tabla['Ui'].tolist(), tabla['i/N'].tolist(), max)
 
     print('')
     print('=== RESULTADO ===')

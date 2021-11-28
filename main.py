@@ -1,10 +1,11 @@
 import math
 from random import random
 
+from Pruebas import pSeries, pDistancias, pPoker
 from chi_cuadrado import chi_cuadrado
 from kolmogorov import kolmogorov
 
-print("=== PROGRAMA ===")
+print("=== EVALUACIÓN DE PRUEBAS ESTADÍSTICAS ===")
 
 
 def get_total_numeros():
@@ -58,9 +59,12 @@ def seleccionar_prueba(numeros_aleatorios):
             chi_cuadrado(numeros_aleatorios, porcentaje)
         elif opcion == 2:
             kolmogorov(numeros_aleatorios, porcentaje)
-        elif opcion == 6:
-            print('BYE!')
-            break
+        elif opcion == 3:
+            pSeries(numeros_aleatorios, porcentaje)
+        elif opcion == 4:
+            pDistancias(numeros_aleatorios, porcentaje, 0.3, 0.6)
+        elif opcion == 5:
+            pPoker(numeros_aleatorios, porcentaje)
 
 
 def seleccionar_porcentaje_fallo():
@@ -80,7 +84,6 @@ def seleccionar_porcentaje_fallo():
             return 0.1
         else:
             print('¡Selecciona una opción valida!')
-
 
 
 total_numeros = get_total_numeros()
